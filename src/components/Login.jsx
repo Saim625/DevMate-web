@@ -8,6 +8,7 @@ import { BASE_URL } from "../utils/constants";
 const Login = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,13 +28,13 @@ const Login = () => {
       dispatch(addUser(res.data))
       navigate('/')
     } catch (err) {
-      console.log(err);
+      setError(err.response.data || "Login error")
     }
   };
 
   return (
     <div class="relative flex flex-col justify-center h-screen overflow-hidden">
-      <div class="w-full p-6 m-auto bg-base-300 rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
+      <div class="w-full max-w-sm p-6 m-auto bg-base-300 rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
         <h1 class="text-3xl font-semibold text-center">Login</h1>
         <form class="space-y-4">
           <div>
@@ -63,6 +64,7 @@ const Login = () => {
           <a href="#" class="text-xs hover:underline hover:text-blue-600">
             Forget Password?
           </a>
+          <p className="text-red-600">{error}</p>
           <div>
             <button
               type="button"
