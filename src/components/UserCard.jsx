@@ -7,7 +7,7 @@ const UserCard = ({ user ,showButton}) => {
     user && (
       <div className="card bg-base-300 h-full w-96 shadow-lg border border-base-300">
         <figure>
-          <img src={imageURL} alt="image" className="w-96" />
+          <img src={imageURL} alt="image" className="w-full max-h-64 object-cover" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{firstName + " " + lastName}</h2>

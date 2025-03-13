@@ -32,11 +32,11 @@ const Body = () => {
   }, []);
 
   return (
-    <>
+    <div className="grid min-h-screen grid-rows-[auto_1fr_auto]">
       <Navbar />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 };
 

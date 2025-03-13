@@ -20,17 +20,18 @@ const Feed = () => {
       console.error(err.message);
     }
   };
+
   useEffect(() => {
     getFeed();
   }, []);
 
-  if(!feed) return
+  if (!feed) return;
 
   return (
     <div className="flex justify-center my-10">
-      <UserCard  user={feed[1]} showButton={true} />
+      <UserCard user={feed[1]} showButton={true} />
     </div>
-  ) 
+  );
 };
 
 export default Feed;
