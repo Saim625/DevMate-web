@@ -27,9 +27,19 @@ const Feed = () => {
 
   if (!feed) return;
 
+  if(feed.length <= 0){
+    return (
+      <div className="flex justify-center items-center ">
+        <h1 className="font-bold text-3xl my-4">
+          No new user found
+        </h1>
+      </div>
+    );
+  }  
+
   return (
     <div className="flex justify-center my-10">
-      <UserCard user={feed[1]} showButton={true} />
+      <UserCard user={feed[0]} showButton={true} />
     </div>
   );
 };
