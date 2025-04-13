@@ -13,6 +13,7 @@ import Service_Policy from "./privacy/Service_Policy";
 import TermsAndConditions from "./privacy/TermsAndConditions";
 import Contact_Us from "./privacy/Contact_Us";
 import Subscriptions from "./components/Subscriptions";
+import Chat from "./components/Chat";
 
 function App() {
   return (
@@ -28,9 +29,13 @@ function App() {
             <Route path="/privacy-policy" element={<Privacy_Policy />} />
             <Route path="/refund-policy" element={<Refund_Policy />} />
             <Route path="/service-policy" element={<Service_Policy />} />
-            <Route path="/terms-and-conditions" element={<TermsAndConditions/>} />
-            <Route path="/contact-us" element={<Contact_Us/>} />
-            <Route path="/subscriptions" element={<Subscriptions/>} />
+            <Route
+              path="/terms-and-conditions"
+              element={<TermsAndConditions />}
+            />
+            <Route path="/contact-us" element={<Contact_Us />} />
+            <Route path="/subscriptions" element={<Subscriptions />} />
+            <Route path="/chat/:targetedUserId" element={<Chat />} />
           </Route>
         </Routes>
       </BrowserRouter>

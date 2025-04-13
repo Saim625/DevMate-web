@@ -24,13 +24,16 @@ const Connections = () => {
 
   const handleRemove = async (connectionId) => {
     try {
-     const res =  await axios.delete(BASE_URL + `/user/connection/remove/${connectionId}`, {
-        withCredentials: true,
-      });
+      const res = await axios.delete(
+        BASE_URL + `/user/connection/remove/${connectionId}`,
+        {
+          withCredentials: true,
+        }
+      );
 
       dispatch(removeConnections(connectionId));
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   };
 
@@ -79,7 +82,9 @@ const Connections = () => {
 
               {/* Actions */}
               <div className="flex flex-col gap-2">
-                <button className="btn btn-primary btn-xs">Message</button>
+                <Link to={"/chat/" + connection._id} >
+                  <button className="btn btn-primary btn-xs">Message</button>
+                </Link>
                 <button
                   className="btn btn-secondary btn-xs"
                   onClick={() => handleRemove(connection.connectionId)}
