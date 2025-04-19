@@ -1,13 +1,17 @@
 import { CheckIcon } from "@heroicons/react/20/solid";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import React from "react";
 
 const Subscriptions = () => {
   const tiers = [
     {
       name: "Silver",
       id: "tier-silver",
-      href: "#",
+      planKey: "silver",
       priceMonthly: "Rs. 500",
-      description: "Basic premium plan to boost your visibility and credibility.",
+      description:
+        "Basic premium plan to boost your visibility and credibility.",
       features: [
         "Blue tick on profile",
         "Profile highlighted in search",
@@ -19,7 +23,7 @@ const Subscriptions = () => {
     {
       name: "Gold",
       id: "tier-gold",
-      href: "#",
+      planKey: "gold",
       priceMonthly: "Rs. 1200",
       description: "Get full access to premium features and priority exposure.",
       features: [
@@ -36,6 +40,24 @@ const Subscriptions = () => {
     return classes.filter(Boolean).join(" ");
   }
 
+  const handleSubscribe = async (planKey) => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "/create-payment",
+        { plan: planKey },
+        { withCredentials: true }
+      );
+
+      if(res.data.redirectUrl) {
+        window.location.href = res.data.redirectUrl;
+      }else {
+        alert("Error: Couldn't get payment URL.");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="bg-base-300 px-6 py-20 sm:py-24 lg:px-8">
       <div className="mx-auto max-w-4xl text-center">
@@ -46,7 +68,8 @@ const Subscriptions = () => {
           Choose the right plan for you
         </p>
         <p className="mt-4 text-base text-white/70 max-w-xl mx-auto">
-          Upgrade your developer profile to unlock premium features and connect better with the community.
+          Upgrade your developer profile to unlock premium features and connect
+          better with the community.
         </p>
       </div>
 
@@ -65,7 +88,10 @@ const Subscriptions = () => {
             >
               {tier.name}
             </h3>
-            <p className="text-3xl font-bold text-white">{tier.priceMonthly} <span className="text-sm font-medium text-white/60">/month</span></p>
+            <p className="text-3xl font-bold text-white">
+              {tier.priceMonthly}{" "}
+              <span className="text-sm font-medium text-white/60">/month</span>
+            </p>
             <p className="mt-3 text-sm text-white/70">{tier.description}</p>
             <ul className="mt-6 space-y-3 text-sm text-white">
               {tier.features.map((feature) => (
@@ -75,15 +101,15 @@ const Subscriptions = () => {
                 </li>
               ))}
             </ul>
-            <a
-              href={tier.href}
+            <button
+              onClick={() => handleSubscribe(tier.planKey)}
               className={classNames(
                 tier.featured ? "btn btn-primary" : "btn btn-secondary",
                 "mt-6 w-full"
               )}
             >
               {tier.featured ? "Upgrade to Gold" : "Choose Silver"}
-            </a>
+            </button>
           </div>
         ))}
       </div>

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
+import { format } from "date-fns";
 
 const Chat = () => {
   const { targetedUserId } = useParams();
@@ -11,24 +12,33 @@ const Chat = () => {
   const [newMessage, setNewMessage] = useState("");
   const user = useSelector((store) => store.user);
   const userId = user?._id;
+  const chatContainerRef = useRef();
 
   const fetchChatMessages = async () => {
     const chat = await axios.get(BASE_URL + "/chat/" + targetedUserId, {
       withCredentials: true,
     });
 
-    console.log(chat.data.messages);
-
     const chatMessage = chat?.data?.messages?.map((msg) => {
-      const { senderId, text } = msg;
+      const { senderId, text, image, createdAt } = msg;
       return {
         firstName: senderId?.firstName,
         lastName: senderId?.lastName,
         text,
+        image,
+        createdAt,
       };
     });
     setMessages(chatMessage);
+    console.log(chatMessage);
   };
+
+  useEffect(() => {
+    chatContainerRef.current?.scrollTo({
+      top: chatContainerRef.current.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [messages]);
 
   useEffect(() => {
     fetchChatMessages();
@@ -43,8 +53,11 @@ const Chat = () => {
       targetedUserId,
     });
 
-    socket.on("messageReceived", ({ firstName, text }) => {
-      setMessages((messages) => [...messages, { firstName, text }]);
+    socket.on("messageReceived", ({ firstName, text, image, createdAt }) => {
+      setMessages((messages) => [
+        ...messages,
+        { firstName, text, image, createdAt },
+      ]);
     });
 
     return () => {
@@ -59,6 +72,7 @@ const Chat = () => {
       userId,
       targetedUserId,
       text: newMessage,
+      image: user.imageURL,
     });
     setNewMessage("");
   };
@@ -70,7 +84,10 @@ const Chat = () => {
         <div className="p-4 border-b font-semibold text-lg bg-base-200">
           Chat
         </div>
-        <div className="flex-1 overflow-scroll p-4 space-y-4 bg-base-100">
+        <div
+          className="flex-1 overflow-y-scroll p-4 space-y-4 bg-base-100"
+          ref={chatContainerRef}
+        >
           {messages.map((msg, index) => (
             <div
               key={index}
@@ -81,18 +98,25 @@ const Chat = () => {
             >
               <div className="chat-image avatar">
                 <div className="w-10 rounded-full">
-                  <img
-                    alt="Obi-Wan avatar"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                  />
+                  <img alt="Obi-Wan avatar" src={msg.image} />
                 </div>
               </div>
               <div className="chat-header">
                 {msg.firstName}
-                <time className="text-xs opacity-50 ml-2">12:45</time>
+                <time className="text-xs opacity-50 ml-2">
+                  {format(new Date(msg.createdAt), "p")}
+                </time>{" "}
               </div>
-              <div className="chat-bubble">{msg.text}</div>
-              <div className="chat-footer opacity-50">Delivered</div>
+              <div
+                className={
+                  "chat-bubble " +
+                  (user.firstName === msg.firstName
+                    ? "chat-bubble-primary text-white"
+                    : "chat-bubble-secondary text-white")
+                }
+              >
+                {msg.text}
+              </div>
             </div>
           ))}
         </div>
