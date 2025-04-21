@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white py-8">
       <div className="container mx-auto">
-        <nav className="grid grid-flow-col gap-6 justify-center text-sm">
+        <nav className="grid sm:grid-flow-col gap-3 sm:gap-6 justify-center text-center text-sm">
           <Link to="/about-us" className="hover:underline">About Us</Link>
           <Link to="/contact-us" className="hover:underline">Contact Us</Link>
           <Link to="/privacy-policy" className="hover:underline">Privacy Policy</Link>

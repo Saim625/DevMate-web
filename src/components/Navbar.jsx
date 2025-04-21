@@ -23,10 +23,14 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-300">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl text-white">
-          DevMate
-        </Link>
-      </div>
+  <Link
+    to="/"
+    className="btn btn-ghost text-2xl  bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent"
+  >
+    DevMate
+  </Link>
+</div>
+
       {user && (
         <div className="flex-none gap-2">
           <div className="form-control">

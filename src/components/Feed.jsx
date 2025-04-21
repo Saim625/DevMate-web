@@ -38,7 +38,7 @@ const Feed = () => {
   }  
 
   return (
-    <div className="flex justify-center my-10">
+    <div className="flex justify-center my-10 px-10">
       <UserCard user={feed[0]} showButton={true} />
     </div>
   );

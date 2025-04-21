@@ -42,21 +42,17 @@ const Login = () => {
         { firstName, lastName, emailId, password },
         { withCredentials: true }
       );
-      dispatch(addUser(res.data.data))
-      navigate("/profile")
+      dispatch(addUser(res.data.data));
+      navigate("/profile");
     } catch (err) {
       setError(err.response.data || "Sign up error");
     }
   };
 
   return (
-    <div
-      className={`relative flex flex-col ${
-        isLogin ? "" : "my-5"
-      } justify-center h-screen overflow-hidden`}
-    >
+    <div className="relative flex flex-col my-5 mx-5 sm:mx-0  overflow-hidden">
       <div class="w-full max-w-sm p-6 m-auto bg-base-300 rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
-        <h1 class="text-3xl font-semibold text-center">
+        <h1 class="text-3xl font-semibold text-center text-white">
           {isLogin ? "Login" : "Sign up"}
         </h1>
         <form class="space-y-4">
@@ -113,23 +109,17 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          {isLogin && (
-            <a href="#" class="text-xs hover:underline hover:text-blue-600">
-              Forget Password?
-            </a>
-          )}
           <p className="text-red-600">{error}</p>
-          <div>
-            <button
-              type="button"
-              class="btn-neutral btn btn-block"
-              onClick={isLogin ? handleLogin : handleSignup}
-            >
-              {isLogin ? "Login" : "Sign up"}
-            </button>
-          </div>
+          <button
+            type="button"
+            className="btn btn-neutral btn-block bg-blue-600 hover:bg-blue-700 text-white"
+            onClick={isLogin ? handleLogin : handleSignup}
+          >
+            {isLogin ? "Login" : "Sign up"}
+          </button>
+
           <p
-            className="cursor-pointer"
+            className="cursor-pointer text-blue-600 hover:underline hover:text-blue-800 transition-colors duration-200"
             onClick={() => setIsLogin((prevValue) => !prevValue)}
           >
             {isLogin

@@ -50,7 +50,7 @@ const Requests = () => {
 
   return (
     <div>
-      <div className="font-bold text-3xl text-center my-10">Requests</div>
+      <div className="font-bold text-3xl text-center my-10 text-white">Requests</div>
       {requests.map((request) => {
         const { _id, imageURL, firstName, lastName, about } =
           request.fromUserId;

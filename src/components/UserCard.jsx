@@ -24,7 +24,7 @@ const UserCard = ({ user, showButton }) => {
   };
 
   return (
-      <div className="card bg-base-300 h-full w-96 shadow-lg border border-base-300">
+      <div className="card bg-base-300 h-auto sm:h-[85vh] w-96 shadow-lg border border-base-300">
         <figure>
           <img
             src={imageURL}
@@ -36,7 +36,7 @@ const UserCard = ({ user, showButton }) => {
           <h2 className="card-title">{firstName + " " + lastName}</h2>
           {gender && <p>{gender}</p>}
           {age && <p>{"age: " + age}</p>}
-          <p className="line-clamp-3">{about}</p>
+          <p className="line-clamp-2">{about}</p>
           {skills && <p>{skills}</p>}
           {showButton && (
             <div className="card-actions justify-center">
