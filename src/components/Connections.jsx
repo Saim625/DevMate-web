@@ -54,7 +54,7 @@ const Connections = () => {
 
   return (
     <div>
-      <div className="font-bold text-3xl text-center my-10">Connections</div>
+      <div className="font-bold text-3xl text-center my-10 text-white">Connections</div>
       {connections.map((connection) => {
         const { imageURL, firstName, lastName, about } = connection;
         return (

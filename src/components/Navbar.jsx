@@ -11,35 +11,28 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    try{
+    try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
-      dispatch(removeUser())
-      navigate('/login')
-    }catch (err) {
-      console.error('Logout Error: ' + err.message)
-      alert('An error occurred during logout. Please try again.');
+      dispatch(removeUser());
+      navigate("/login");
+    } catch (err) {
+      console.error("Logout Error: " + err.message);
+      alert("An error occurred during logout. Please try again.");
     }
   };
   return (
     <div className="navbar bg-base-300">
       <div className="flex-1">
-  <Link
-    to="/"
-    className="btn btn-ghost text-2xl  bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent"
-  >
-    DevMate
-  </Link>
-</div>
+        <Link
+          to="/"
+          className="btn btn-ghost text-2xl  bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent"
+        >
+          DevMate
+        </Link>
+      </div>
 
       {user && (
         <div className="flex-none gap-2">
-          <div className="form-control">
-            <input
-              type="text"
-              placeholder="Search"
-              className="input input-bordered w-24 md:w-auto"
-            />
-          </div>
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -47,10 +40,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src={user.imageURL}
-                />
+                <img alt="Tailwind CSS Navbar component" src={user.imageURL} />
               </div>
             </div>
             <ul

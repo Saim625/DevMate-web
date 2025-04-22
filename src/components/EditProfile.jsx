@@ -50,7 +50,9 @@ const EditProfile = ({ user }) => {
       <div className="flex justify-center my-10">
         <div class=" flex flex-col justify-center overflow-hidden mx-4">
           <div class="w-96 p-6 m-auto bg-base-300 rounded-3xl shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
-            <h1 class="text-3xl font-semibold text-center">Edit Profile</h1>
+            <h1 class="text-3xl font-semibold text-center text-white">
+              Edit Profile
+            </h1>
             <form class="space-y-2">
               <div>
                 <label class="label">
@@ -138,7 +140,7 @@ const EditProfile = ({ user }) => {
               <div>
                 <button
                   type="button"
-                  class="btn-primary btn btn-block"
+                  class="btn-primary text-white btn btn-block"
                   onClick={saveProfile}
                 >
                   Save Changes
@@ -147,18 +149,20 @@ const EditProfile = ({ user }) => {
             </form>
           </div>
         </div>
-        <UserCard
-          user={{
-            firstName,
-            lastName,
-            age,
-            gender,
-            imageURL,
-            about,
-            skills,
-          }}
-          showButton={false}
-        />
+        <div className="hidden md:block">
+          <UserCard
+            user={{
+              firstName,
+              lastName,
+              age,
+              gender,
+              imageURL,
+              about,
+              skills,
+            }}
+            showButton={false}
+          />
+        </div>
       </div>
       {showToast && (
         <div className="toast toast-top toast-center">

@@ -16,6 +16,8 @@ import Subscriptions from "./components/Subscriptions";
 import Chat from "./components/Chat";
 import ThankYou from "./utils/ThankYou";
 import Cancel from "./utils/Cancel";
+import About_Us from "./privacy/About_Us";
+import LandingIntro from "./components/LandingIntro";
 
 function App() {
   return (
@@ -36,10 +38,12 @@ function App() {
               element={<TermsAndConditions />}
             />
             <Route path="/contact-us" element={<Contact_Us />} />
+            <Route path="/about-us" element={<About_Us />} />
             <Route path="/subscriptions" element={<Subscriptions />} />
             <Route path="/chat/:targetedUserId" element={<Chat />} />
             <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/cancel" element={<Cancel />} />
+            <Route path="/landing-intro" element={<LandingIntro />} />
           </Route>
         </Routes>
       </BrowserRouter>
