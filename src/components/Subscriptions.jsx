@@ -1,9 +1,26 @@
 import { CheckIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Subscriptions = () => {
+  const [isPremium, setIsPremium] = useState(false);
+
+  const handlePremium = async () => {
+    const res = await axios.get(BASE_URL + "/premium/verify", {
+      withCredentials: true,
+    });
+    if (res.data.message === "User is premium") {
+      setIsPremium(true);
+    } else {
+      setIsPremium(false);
+    }
+  };
+
+  useEffect(() => {
+    handlePremium();
+  }, []);
+
   const tiers = [
     {
       name: "Silver",
@@ -48,9 +65,9 @@ const Subscriptions = () => {
         { withCredentials: true }
       );
 
-      if(res.data.redirectUrl) {
+      if (res.data.redirectUrl) {
         window.location.href = res.data.redirectUrl;
-      }else {
+      } else {
         alert("Error: Couldn't get payment URL.");
       }
     } catch (err) {
@@ -58,7 +75,22 @@ const Subscriptions = () => {
     }
   };
 
-  return (
+  return isPremium ? (
+    <div className="bg-base-300 px-6 py-20 sm:py-24 lg:px-8">
+      <div className="mx-auto max-w-4xl text-center">
+        <h2 className="text-primary font-bold text-lg uppercase tracking-wide">
+          Subscriptions
+        </h2>
+        <p className="mt-2 text-4xl font-bold text-white sm:text-5xl">
+          You are already a premium member
+        </p>
+        <p className="mt-4 text-base text-white/70 max-w-xl mx-auto">
+          Thank you for being a premium member. You can enjoy all the features
+          without any interruptions.
+        </p>
+      </div>
+    </div>
+  ) : (
     <div className="bg-base-300 px-6 py-20 sm:py-24 lg:px-8">
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="text-primary font-bold text-lg uppercase tracking-wide">
