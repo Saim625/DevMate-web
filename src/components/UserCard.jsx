@@ -24,7 +24,7 @@ const UserCard = ({ user, showButton }) => {
   };
 
   return (
-      <div className="card bg-base-300 h-auto sm:h-[85vh] w-96 shadow-lg border border-base-300">
+      <div className="card bg-base-300 h-auto sm:h-[85vh] w-80 sm:w-96 shadow-lg border border-base-300">
         <figure>
           <img
             src={imageURL}

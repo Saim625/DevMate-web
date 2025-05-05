@@ -62,7 +62,7 @@ const Connections = () => {
             key={connection._id}
             className="flex justify-center items-center my-5 px-4"
           >
-            <div className="card w-96 bg-base-300 shadow-xl border border-base-300 p-4 flex flex-row items-center gap-4">
+            <div className="card w-80 sm:w-96 bg-base-300 shadow-xl border border-base-300 p-4 flex flex-row items-center gap-4">
               {/* Profile Picture */}
               <div className="w-16 h-16">
                 <img

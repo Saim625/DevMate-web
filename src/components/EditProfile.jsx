@@ -49,7 +49,7 @@ const EditProfile = ({ user }) => {
     <>
       <div className="flex justify-center my-10">
         <div class=" flex flex-col justify-center overflow-hidden mx-4">
-          <div class="w-96 p-6 m-auto bg-base-300 rounded-3xl shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
+          <div class="w-80 sm:w-96 p-6 m-auto bg-base-300 rounded-3xl shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
             <h1 class="text-3xl font-semibold text-center text-white">
               Edit Profile
             </h1>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FaReact, FaNode, FaPython, FaGithub, FaUsers } from "react-icons/fa";
@@ -12,6 +12,24 @@ const features = [
 ];
 
 const LandingIntro = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if device is mobile on component mount and window resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 935);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener("resize", checkMobile);
+    
+    // Clean up
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <div className="relative min-h-screen bg-base-300 text-base-content flex items-center justify-center px-4 sm:px-8 py-16">
       {/* Floating background blob */}
@@ -28,21 +46,25 @@ const LandingIntro = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        {/* Headline with typing effect */}
+        {/* Headline - conditionally render static or animated version */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight text-white">
-          <TypeAnimation
-            sequence={[
-              "Welcome to DevMate",
-              1500,
-              "Connect. Collaborate. Create.",
-              1500,
-              "Find Your Developer Tribe.",
-              1500,
-            ]}
-            wrapper="span"
-            speed={50}
-            repeat={Infinity}
-          />
+          {isMobile ? (
+            "Welcome to DevMate"
+          ) : (
+            <TypeAnimation
+              sequence={[
+                "Welcome to DevMate",
+                1500,
+                "Connect. Collaborate. Create.",
+                1500,
+                "Find Your Developer Tribe.",
+                1500,
+              ]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+            />
+          )}
         </h1>
 
         <p className="text-lg md:text-xl mb-10 text-base-content max-w-2xl">

@@ -41,7 +41,7 @@ const Requests = () => {
   if (requests.length === 0) {
     return (
       <div className="flex justify-center items-center ">
-        <h1 className="font-bold text-3xl my-4">
+        <h1 className="font-bold text-2xl sm:text-3xl my-4">
           You don't have any requests yet
         </h1>
       </div>
@@ -57,7 +57,7 @@ const Requests = () => {
           request.fromUserId;
         return (
           <div key={_id} className="flex justify-center items-center my-5 px-4">
-            <div className="card w-96 bg-base-300 shadow-xl border border-base-300 p-4 flex flex-row items-center gap-4">
+            <div className="card w-80 sm:w-96 bg-base-300 shadow-xl border border-base-300 p-4 flex flex-row items-center gap-4">
               {/* Profile Picture */}
               <div className="w-16 h-16">
                 <img
