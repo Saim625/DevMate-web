@@ -26,9 +26,11 @@ const Navbar = () => {
 
   const handleItemClick = (callback = null) => {
     setIsOpen(false);
+    setTimeout(() => {
     if (callback) {
       callback();
     }
+  }, 10);
   };
 
   const toggleDropdown = () => {
@@ -107,12 +109,12 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <a 
-                    onClick={() => handleItemClick(handleLogout)}
-                    className="cursor-pointer"
+                <button 
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 hover:bg-base-200 rounded-md"
                   >
                     Logout
-                  </a>
+                  </button>
                 </li>
               </ul>
             )}
